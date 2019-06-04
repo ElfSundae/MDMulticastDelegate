@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'MDMulticastDelegate'
-    s.version = '1.0.0'
+    s.version = '1.1.0'
     s.summary = 'Multicast delegate'
     s.homepage = 'https://github.com/ElfSundae/MDMulticastDelegate'
     s.license = 'MIT'
