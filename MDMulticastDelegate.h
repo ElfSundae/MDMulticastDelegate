@@ -27,14 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MDMulticastDelegate<__covariant DelegateType> : NSObject
 
 /**
- Add delegate with main queue.
+ Add a delegate object with the main dispatch queue.
+ @discussion The delegate methods will be invoked on the main dispatch queue.
 
  @param delegate target to invoke
  */
 - (void)addDelegate:(DelegateType)delegate;
 
 /**
- Add delegate with queue.
+ Add a delegate-queue pair.
+ @discussion The delegate methods will be invoked on the given dispatch queue.
 
  @param delegate target to invoke
  @param delegateQueue queue to dispatch for invoking
@@ -42,14 +44,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addDelegate:(DelegateType)delegate delegateQueue:(dispatch_queue_t)delegateQueue;
 
 /**
- Remove delegate and all of different queues for this delegate.
+ Remove a delegate object and all related dispatch queues.
 
  @param delegate target to remove
  */
 - (void)removeDelegate:(DelegateType)delegate;
 
 /**
- Remove delegate and queue.
+ Remove a delegate-queue pair.
+ @discussion If the optionally `delegateQueue` is given nil, all related queues
+ will be removed.
 
  @param delegate target to remove
  @param delegateQueue queue to dispatch for invoking
@@ -57,17 +61,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeDelegate:(DelegateType)delegate delegateQueue:(nullable dispatch_queue_t)delegateQueue;
 
 /**
- Remove all delegates and queues
+ Remove all delegate objects.
  */
 - (void)removeAllDelegates;
 
 /**
- Count of delegate items, maybe multiple queues of an delegate.
+ Count of delegate-queue pairs.
  */
 - (NSUInteger)count;
 
 /**
- Count of delegates.
+ Count of delegate objects.
  */
 - (NSUInteger)countOfDelegates;
 
