@@ -1,6 +1,6 @@
 # MDMulticastDelegate
 
-`MDMulticastDelegate` provides multicast delegate functionality, it is inspired by [`GCDMulticastDelegate`](https://github.com/robbiehanson/XMPPFramework/blob/master/Utilities/GCDMulticastDelegate.h) from XMPPFramework.
+`MDMulticastDelegate` provides thread-safely multicast delegate functionality, it is inspired by the [`GCDMulticastDelegate`](https://github.com/robbiehanson/XMPPFramework/blob/master/Utilities/GCDMulticastDelegate.h) from [XMPPFramework](https://github.com/robbiehanson/XMPPFramework).
 
 ## Installation
 
