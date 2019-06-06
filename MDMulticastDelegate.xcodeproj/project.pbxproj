@@ -32,8 +32,9 @@
 		0832A7E01E0A8F7000A132F9 = {
 			isa = PBXGroup;
 			children = (
+				0832A7F91E0A902E00A132F9 /* MDMulticastDelegate.h */,
+				0832A7FA1E0A902E00A132F9 /* MDMulticastDelegate.m */,
 				08AFDFAD1E0AA2D000942754 /* Info.plist */,
-				0832A7EC1E0A8F7000A132F9 /* MDMulticastDelegate */,
 				0832A7EB1E0A8F7000A132F9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,15 +45,6 @@
 				0832A7EA1E0A8F7000A132F9 /* MDMulticastDelegate.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0832A7EC1E0A8F7000A132F9 /* MDMulticastDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				0832A7F91E0A902E00A132F9 /* MDMulticastDelegate.h */,
-				0832A7FA1E0A902E00A132F9 /* MDMulticastDelegate.m */,
-			);
-			path = MDMulticastDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
