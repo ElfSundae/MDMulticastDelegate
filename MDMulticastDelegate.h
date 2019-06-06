@@ -4,45 +4,104 @@
  * This class provides multicast delegate functionality. That is:
  * - it provides a means for managing a list of delegates
  * - any method invocations to an instance of this class are automatically forwarded to all delegates
- * 
+ *
  * For example:
- * 
+ *
  * // Make this method call on every added delegate (there may be several)
  * [multicastDelegate cog:self didFindThing:thing];
- * 
+ *
  * This allows multiple delegates to be added to an xmpp stream or any xmpp module,
  * which in turn makes development easier as there can be proper separation of logically different code sections.
- * 
+ *
  * In addition, this makes module development easier,
  * as multiple delegates can usually be handled in a manner similar to the traditional single delegate paradigm.
- * 
+ *
  * This class also provides proper support for GCD queues.
  * So each delegate specifies which queue they would like their delegate invocations to be dispatched onto.
- * 
+ *
  * All delegate dispatching is done asynchronously (which is a critically important architectural design).
-**/
+ **/
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Unsupported union type.
-@interface MDMulticastDelegate<__covariant DelegateType> : NSObject 
+@interface MDMulticastDelegate<__covariant DelegateType> : NSObject
 
+/**
+ Add a delegate object with the main dispatch queue.
+ @discussion The delegate methods will be invoked on the main dispatch queue.
+
+ @param delegate target to invoke
+ */
+- (void)addDelegate:(DelegateType)delegate;
+
+/**
+ Add a delegate-queue pair.
+ @discussion The delegate methods will be invoked on the given dispatch queue.
+
+ @param delegate target to invoke
+ @param delegateQueue queue to dispatch for invoking
+ */
 - (void)addDelegate:(DelegateType)delegate delegateQueue:(dispatch_queue_t)delegateQueue;
-- (void)removeDelegate:(DelegateType)delegate delegateQueue:(nullable dispatch_queue_t)delegateQueue;
+
+/**
+ Remove a delegate object and all related dispatch queues.
+
+ @param delegate target to remove
+ */
 - (void)removeDelegate:(DelegateType)delegate;
 
+/**
+ Remove a delegate-queue pair.
+ @discussion If the optionally `delegateQueue` is given nil, all related queues
+ will be removed.
+
+ @param delegate target to remove
+ @param delegateQueue queue to dispatch for invoking
+ */
+- (void)removeDelegate:(DelegateType)delegate delegateQueue:(nullable dispatch_queue_t)delegateQueue;
+
+/**
+ Remove all delegate objects.
+ */
 - (void)removeAllDelegates;
 
+/**
+ Count of delegate-queue pairs.
+ */
 - (NSUInteger)count;
+
+/**
+ Count of delegate objects.
+ */
+- (NSUInteger)countOfDelegates;
+
+/**
+ Count of delegate items is kind of this class, maybe multiple queues of an delegate.
+
+ @param aClass class of delegate
+ */
 - (NSUInteger)countOfClass:(Class)aClass;
+
+/**
+ Count of delegate items is repsonding this selector, maybe multiple queues of an delegate.
+
+ @param aSelector selector to repsond for delegates
+ */
 - (NSUInteger)countForSelector:(SEL)aSelector;
 
+/**
+ Whether there is any delegate responding selector.
+
+ @param aSelector selector to repsond for delegates
+ */
 - (BOOL)hasDelegateThatRespondsToSelector:(SEL)aSelector;
 
-- (NSEnumerator<DelegateType> *)delegateEnumerator;
-- (NSArray<dispatch_queue_t> *)delegateQueuesForDelegate:(DelegateType)delegate;
+/**
+ Enumerate all of delegates and queues
 
-- (void)enumerateDelegateAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(DelegateType delegate, dispatch_queue_t delegateQueue, BOOL *stop))block;
+ @param block block for selection of delegate item
+ */
+- (void)enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(DelegateType delegate, dispatch_queue_t delegateQueue, BOOL *stop))block;
 
 @end
 
