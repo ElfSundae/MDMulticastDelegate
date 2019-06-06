@@ -39,7 +39,7 @@
 #pragma mark - private
 
 - (void)_addDelegate:(id)delegate delegateQueue:(dispatch_queue_t)delegateQueue {
-    NSMutableOrderedSet<dispatch_queue_t> *queues = [_delegates objectForKey:delegate];
+    NSMutableOrderedSet *queues = [_delegates objectForKey:delegate];
     if (!queues) {
         queues = [NSMutableOrderedSet orderedSet];
         [_delegates setObject:queues forKey:delegate];
@@ -50,9 +50,7 @@
 
 - (void)_removeDelegate:(id)delegate delegateQueue:(dispatch_queue_t)delegateQueue {
     if (delegateQueue) {
-        NSMutableOrderedSet<dispatch_queue_t> *queues = [_delegates objectForKey:delegate];
-        if (![queues containsObject:delegateQueue]) return;
-
+        NSMutableOrderedSet *queues = [_delegates objectForKey:delegate];
         [queues removeObject:delegateQueue];
 
         if (!queues.count) {
@@ -268,7 +266,7 @@
 }
 
 - (void)removeDelegate:(id)delegate {
-    [self removeDelegate:delegate delegateQueue:NULL];
+    [self removeDelegate:delegate delegateQueue:nil];
 }
 
 - (void)removeAllDelegates {
