@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MDMulticastDelegate<__covariant DelegateType> : NSObject
 
 /**
- Add a delegate object with the main dispatch queue.
+ Add a delegate object to the dispatch table with the main dispatch queue.
  @discussion The delegate methods will be invoked on the main dispatch queue.
 
  @param delegate target to invoke
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addDelegate:(DelegateType)delegate;
 
 /**
- Add a delegate-queue pair.
+ Add a delegate object to the dispatch table with a given dispatch queue.
  @discussion The delegate methods will be invoked on the given dispatch queue.
 
  @param delegate target to invoke
@@ -44,16 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addDelegate:(DelegateType)delegate delegateQueue:(dispatch_queue_t)delegateQueue;
 
 /**
- Remove a delegate object and all related dispatch queues.
+ Remove a delegate object from the dispatch table.
 
  @param delegate target to remove
  */
 - (void)removeDelegate:(DelegateType)delegate;
 
 /**
- Remove a delegate-queue pair.
- @discussion If the optionally `delegateQueue` is given nil, all related queues
- will be removed.
+ Remove a delegate object specifying a given dispatch queue from the dispatch table.
 
  @param delegate target to remove
  @param delegateQueue queue to dispatch for invoking
@@ -61,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeDelegate:(DelegateType)delegate delegateQueue:(nullable dispatch_queue_t)delegateQueue;
 
 /**
- Remove all delegate objects.
+ Remove all delegate objects from the dispatch table.
  */
 - (void)removeAllDelegates;
 
@@ -76,30 +74,30 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSUInteger)countOfDelegates;
 
 /**
- Count of delegate items is kind of this class, maybe multiple queues of an delegate.
+ Count of delegate-queue pairs of which delegate is kind of the given class.
 
  @param aClass class of delegate
  */
 - (NSUInteger)countOfClass:(Class)aClass;
 
 /**
- Count of delegate items is repsonding this selector, maybe multiple queues of an delegate.
+ Count of delegate-queue pairs of which delegate can respond to the specified selector.
 
  @param aSelector selector to repsond for delegates
  */
 - (NSUInteger)countForSelector:(SEL)aSelector;
 
 /**
- Whether there is any delegate responding selector.
+ Detects whether exist any delegate object that can respond to the given selector.
 
  @param aSelector selector to repsond for delegates
  */
 - (BOOL)hasDelegateThatRespondsToSelector:(SEL)aSelector;
 
 /**
- Enumerate all of delegates and queues
+ Applies a given block to the entries of the dispatch table.
 
- @param block block for selection of delegate item
+ @param block A block to operate
  */
 - (void)enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(DelegateType delegate, dispatch_queue_t delegateQueue, BOOL *stop))block;
 
