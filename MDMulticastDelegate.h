@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Remove a delegate object from the dispatch table.
+ @discussion You don't need to remove a delegate object in its dealloc method.
 
  @param delegate target to remove
  */
@@ -52,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Remove a delegate object specifying a given dispatch queue from the dispatch table.
+ @discussion You don't need to remove a delegate object in its dealloc method.
 
  @param delegate target to remove
  @param delegateQueue queue to dispatch for invoking
