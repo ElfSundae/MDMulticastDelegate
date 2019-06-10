@@ -328,7 +328,7 @@
 
     [_lock lock];
     for (id delegate in _delegates) {
-        NSMethodSignature *result = [delegate methodSignatureForSelector:aSelector];
+        result = [delegate methodSignatureForSelector:aSelector];
 
         if (result) break;
     }
