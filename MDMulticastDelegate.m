@@ -97,7 +97,7 @@
     }
 }
 
-- (void)_enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(id delegate, dispatch_queue_t delegateQueue, BOOL *stop))block {
+- (void)_enumerateDelegatesAndQueues:(void (NS_NOESCAPE ^)(id delegate, dispatch_queue_t delegateQueue, BOOL *stop))block {
     BOOL stop = NO;
     for (id delegate in _delegates) {
         for (dispatch_queue_t queue in [_delegates objectForKey:delegate]) {
@@ -330,9 +330,9 @@
     [_lock unlock];
 }
 
-- (void)enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(id delegate, dispatch_queue_t delegateQueue, BOOL *stop))block {
+- (void)enumerateDelegatesAndQueues:(void (NS_NOESCAPE ^)(id delegate, dispatch_queue_t delegateQueue, BOOL *stop))block {
     [_lock lock];
-    [self _enumerateDelegatesAndQueuesUsingBlock:block];
+    [self _enumerateDelegatesAndQueues:block];
     [_lock unlock];
 }
 

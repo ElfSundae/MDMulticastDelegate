@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param block A block to operate
  */
-- (void)enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(DelegateType delegate, dispatch_queue_t delegateQueue, BOOL *stop))block;
+- (void)enumerateDelegatesAndQueues:(void (NS_NOESCAPE ^)(DelegateType delegate, dispatch_queue_t delegateQueue, BOOL *stop))block;
 
 @end
 
