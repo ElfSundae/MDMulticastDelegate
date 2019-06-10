@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'MDMulticastDelegate'
-    s.version = '1.2.0'
+    s.version = '1.3.0'
     s.summary = 'Thread-safe multicast delegate'
     s.homepage = 'https://github.com/ElfSundae/MDMulticastDelegate'
     s.license = 'MIT'
