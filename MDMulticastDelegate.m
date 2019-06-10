@@ -88,6 +88,15 @@
     return NO;
 }
 
+- (void)_enumerateDelegates:(void (NS_NOESCAPE ^)(id delegate, BOOL *stop))block {
+    BOOL stop = NO;
+    for (id delegate in _delegates) {
+        block(delegate, &stop);
+
+        if (stop) return;
+    }
+}
+
 - (void)_enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(id delegate, dispatch_queue_t delegateQueue, BOOL *stop))block {
     BOOL stop = NO;
     for (id delegate in _delegates) {
@@ -313,6 +322,12 @@
     BOOL responds = [self _hasDelegateThatRespondsToSelector:aSelector];
     [_lock unlock];
     return responds;
+}
+
+- (void)enumerateDelegates:(void (NS_NOESCAPE ^)(id delegate, BOOL *stop))block {
+    [_lock lock];
+    [self _enumerateDelegates:block];
+    [_lock unlock];
 }
 
 - (void)enumerateDelegatesAndQueuesUsingBlock:(void (NS_NOESCAPE ^)(id delegate, dispatch_queue_t delegateQueue, BOOL *stop))block {

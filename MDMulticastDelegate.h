@@ -97,6 +97,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)hasDelegateThatRespondsToSelector:(SEL)aSelector;
 
 /**
+ Applies a given block to the delegate objects.
+
+ @param block A block to operate
+ */
+- (void)enumerateDelegates:(void (NS_NOESCAPE ^)(DelegateType delegate, BOOL *stop))block;
+
+/**
  Applies a given block to the entries of the dispatch table.
 
  @param block A block to operate
