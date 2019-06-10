@@ -49,6 +49,10 @@ self.delegates = [MDMulticastDelegate<FooProtocol> new];
 ### Enumerate delegate objects
 
 ```objc
+[self.delegates enumerateDelegates:^(id<FooProtocol> delegate, BOOL *stop) {
+    //
+}];
+
 [self.delegates enumerateDelegatesAndQueues:
     ^(id<FooProtocol> delegate, dispatch_queue_t delegateQueue, BOOL *stop) {
         //
